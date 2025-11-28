@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Rate Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>RateTracker</span>
+            </div>
+            
+            <nav class="currency-nav">
+                <h3>Currencies</h3>
+                <ul id="currency-list">
+                    <li class="active" data-currency="USD">
+                        <span class="flag-icon">🇺🇸</span>
+                        <span class="currency-name">USD / CNY</span>
+                    </li>
+                    <li data-currency="JPY">
+                        <span class="flag-icon">🇯🇵</span>
+                        <span class="currency-name">JPY / CNY</span>
+                    </li>
+                    <li data-currency="THB">
+                        <span class="flag-icon">🇹🇭</span>
+                        <span class="currency-name">THB / CNY</span>
+                    </li>
+                    <li data-currency="MYR">
+                        <span class="flag-icon">🇲🇾</span>
+                        <span class="currency-name">MYR / CNY</span>
+                    </li>
+                    <li data-currency="SGD">
+                        <span class="flag-icon">🇸🇬</span>
+                        <span class="currency-name">SGD / CNY</span>
+                    </li>
+                    <li data-currency="PHP">
+                        <span class="flag-icon">🇵🇭</span>
+                        <span class="currency-name">PHP / CNY</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="rate-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label">Invert Rate</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h2 id="current-view-title">USD - US Dollar Trend</h2>
+                <div class="date-display" id="current-date"></div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Chart Section -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <h3>30 Day History</h3>
+                        <div class="chart-actions">
+                            <!-- Future actions like zoom could go here -->
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="rateChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Summary Cards Section -->
+                <div class="summary-grid" id="summary-container">
+                    <!-- Cards injected by JS -->
+                    <div class="card loading-card">
+                        <div class="spinner"></div>
+                        <p>Loading market data...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
